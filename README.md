@@ -1,10 +1,10 @@
-# Coach.ai
+# Alignify
 
-Coach.ai is a mobile application built using Flutter that uses TensorFlow's MoveNet model for pose detection to help users count their reps and detect the correctness of their pose. In addition to this, the app has additional modules for BMI calculation, nutrition tracking, and user authentication using Firebase.
+Alignify is a mobile application built using Flutter that uses TensorFlow's MoveNet model for pose detection to help users count their reps and detect the correctness of their pose. In addition to this, the app has additional modules for BMI calculation, nutrition tracking, and user authentication using Firebase.
 
 ## Features
 
-The following are the key features of the Coach.ai app:
+The following are the key features of the Alignify app:
 
 - **Reps counter**: The app uses the MoveNet model to detect the user's pose and count the number of reps they perform for a specific exercise.
 - **Pose correctness detection**: The app also checks the correctness of the user's pose and provides feedback on how to improve their form. The app uses custom machine learning models trained on MoveNet keypoints as input to classify the correctness of the user's pose.
@@ -20,28 +20,6 @@ The following technologies were used to build the Alignify app:
 - **TensorFlow**: TensorFlow is an open-source software library for dataflow and differentiable programming across a range of tasks. It is used for building and training machine learning models.
 - **MoveNet**: MoveNet is a lightweight and efficient neural network architecture for human pose estimation that can run on mobile devices.
 - **Firebase**: Firebase is a mobile and web application development platform that provides a suite of services to help developers build, grow, and monetize their apps.
-
-## Getting Started
-
-To get started with the Coach.ai app, follow these steps:
-
-1. Clone the repository to your local machine.
-
-```bash
-git clone https://github.com/MohEsmail143/coach-ai.git
-```
-
-2. Navigate to the root directory of the project and run the following command to install the dependencies:
-
-```bash
-flutter pub get
-```
-
-3. Launch the app on an emulator or a physical device
-
-```bash
-flutter run
-```
 
 ## Contributing
 

@@ -1,4 +1,4 @@
-import 'package:coach_ai/services/firebase_auth_service.dart';
+import 'package:alignify/services/firebase_auth_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -17,7 +17,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _emailController = TextEditingController();
 
   final TextEditingController _passwordController = TextEditingController();
-
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +54,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       fontWeight: FontWeight.bold,
                     )),
               ),
-
               CustomizedTextfield(
                 myController: _emailController,
                 hintText: "Email",
@@ -66,7 +64,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 hintText: "Password",
                 isPassword: true,
               ),
-
               CustomizedButton(
                 buttonText: "Register",
                 buttonColor: Colors.black,

@@ -106,7 +106,7 @@ final List<Exercise> availableExercises = [
     trackedKeypoint: kKeypointDict['nose'] as int,
     trackingDirection: 1,
     fullRepPosition: true,
-    formCorrectnessModel: 'models/squat.tflite',
+    formCorrectnessModel: 'models/tadasana_v2.tflite',
     targetedMuscles: [
       'Quads',
       'Hip Flexors',

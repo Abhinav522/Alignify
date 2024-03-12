@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -25,16 +28,19 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
-              'you can reconfigure this by running the FlutterFire CLI again.',
+          'you can reconfigure this by running the FlutterFire CLI again.',
         );
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
-              'you can reconfigure this by running the FlutterFire CLI again.',
+          'you can reconfigure this by running the FlutterFire CLI again.',
         );
       default:
         throw UnsupportedError(
@@ -43,40 +49,20 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBxz_nmuuY8hIKpZJuQBFuFa9kTOg92GEY',
-    appId: '1:755241422449:web:a84fc1e953ffd130e115d0',
-    messagingSenderId: '755241422449',
-    projectId: 'tech101-firebase-auth',
-    authDomain: 'tech101-firebase-auth.firebaseapp.com',
-    storageBucket: 'tech101-firebase-auth.appspot.com',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyB17xXm3MG-d4RULIDsR8Btl1iQWlftLQA',
-    appId: '1:755241422449:android:602539bee5ad0ba1e115d0',
-    messagingSenderId: '755241422449',
-    projectId: 'tech101-firebase-auth',
-    storageBucket: 'tech101-firebase-auth.appspot.com',
+    apiKey: 'AIzaSyDiWbMEki-l8MSlWJX1p9lbVfgPibwT6Yo',
+    appId: '1:324855523844:android:afe8d6c30688aac67ba351',
+    messagingSenderId: '324855523844',
+    projectId: 'alignify-83a78',
+    storageBucket: 'alignify-83a78.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBzr9l4e3yyplGrn5Rzg3dU310naV-NX04',
-    appId: '1:755241422449:ios:60000bcb0da4fd28e115d0',
-    messagingSenderId: '755241422449',
-    projectId: 'tech101-firebase-auth',
-    storageBucket: 'tech101-firebase-auth.appspot.com',
-    iosClientId: '755241422449-0basr5bte9t3v3k0hito3mvnn7es74iu.apps.googleusercontent.com',
-    iosBundleId: 'com.example.firebaseAuth',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBzr9l4e3yyplGrn5Rzg3dU310naV-NX04',
-    appId: '1:755241422449:ios:60000bcb0da4fd28e115d0',
-    messagingSenderId: '755241422449',
-    projectId: 'tech101-firebase-auth',
-    storageBucket: 'tech101-firebase-auth.appspot.com',
-    iosClientId: '755241422449-0basr5bte9t3v3k0hito3mvnn7es74iu.apps.googleusercontent.com',
-    iosBundleId: 'com.example.firebaseAuth',
+    apiKey: 'AIzaSyB-Innv1DSgzrcMHi7s2lemsTVXVS1-wAk',
+    appId: '1:324855523844:ios:bc5c962c94712e247ba351',
+    messagingSenderId: '324855523844',
+    projectId: 'alignify-83a78',
+    storageBucket: 'alignify-83a78.appspot.com',
+    iosBundleId: 'com.example.alignify',
   );
 }

@@ -1,4 +1,4 @@
-import 'package:coach_ai/screens/bmi/result_bmi.dart';
+import 'package:alignify/screens/bmi/result_bmi.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 

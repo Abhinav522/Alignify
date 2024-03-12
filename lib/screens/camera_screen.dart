@@ -10,9 +10,9 @@ import '../utils/camera/coach_tts.dart';
 import '../utils/exercise.dart';
 import '../utils/camera/rep_counter.dart';
 import '../utils/camera/form_classifier.dart';
+
 import '../utils/camera/pose_detector.dart';
 import '../utils/camera/pose_detector_isolate.dart';
-
 import '../utils/workout_session.dart';
 import '../utils/camera/render_landmarks.dart';
 
@@ -590,3 +590,4 @@ class _CameraScreenState extends State<CameraScreen>
     super.dispose();
   }
 }
+

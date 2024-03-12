@@ -1,4 +1,4 @@
-import 'package:coach_ai/widgets/customized_button.dart';
+import 'package:alignify/widgets/customized_button.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/customized_textfield.dart';

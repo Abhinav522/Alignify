@@ -14,7 +14,7 @@ The following are the key features of the Coach.ai app:
 
 ## Technologies Used
 
-The following technologies were used to build the Coach.ai app:
+The following technologies were used to build the Alignify app:
 
 - **Flutter**: Flutter is an open-source UI software development kit created by Google. It is used for building high-performance, high-fidelity apps for Android, iOS, web, and desktop from a single codebase.
 - **TensorFlow**: TensorFlow is an open-source software library for dataflow and differentiable programming across a range of tasks. It is used for building and training machine learning models.

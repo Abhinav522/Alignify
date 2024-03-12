@@ -1,12 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:coach_ai/screens/welcome_screen.dart';
+// import 'package:alignify/screens/welcome_screen.dart';
 // import 'firebase_options.dart';
 
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:coach_ai/screens/IntroPage.dart';
+import 'package:alignify/screens/IntroPage.dart';
 
-import 'package:coach_ai/screens/home_screen.dart';
+import 'package:alignify/screens/home_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Coach.ai',
+      title: 'Alignify',
       theme: ThemeData(
         // brightness: Brightness.dark,
         textTheme: GoogleFonts.urbanistTextTheme(),
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
             return const HomeScreen();
           } else {
             //return WelcomeScreen();
-             return IntroPage();
+            return IntroPage();
           }
         },
       ),

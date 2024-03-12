@@ -1,4 +1,4 @@
-import 'package:coach_ai/screens/exercise_selection_screen.dart';
+import 'package:alignify/screens/exercise_selection_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -118,7 +118,7 @@ class HomeViewBody extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "Coach.AI",
+                        "Alignify",
                         style: GoogleFonts.bebasNeue(
                           fontSize: 32,
                           color: const Color(0xFF68B984),

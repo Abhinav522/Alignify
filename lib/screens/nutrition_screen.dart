@@ -5,25 +5,25 @@ class NutritionScreen extends StatelessWidget {
 
   final List<Tab> tabs = const [
     Tab(
-      child: Text("SATURDAY"),
+      child: Text("SAT"),
     ),
     Tab(
-      child: Text("SUNDAY"),
+      child: Text("SUN"),
     ),
     Tab(
-      child: Text("MONDAY"),
+      child: Text("MON"),
     ),
     Tab(
-      child: Text("TUESDAY"),
+      child: Text("TUE"),
     ),
     Tab(
-      child: Text("WEDNESDAY"),
+      child: Text("WED"),
     ),
     Tab(
-      child: Text("THURSDAY"),
+      child: Text("THU"),
     ),
     Tab(
-      child: Text("FRIDAY"),
+      child: Text("FRI"),
     ),
   ];
 

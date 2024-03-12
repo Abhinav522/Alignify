@@ -32,7 +32,7 @@ class WelcomeScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 70.0),
                   child: Text(
-                    "COACH",
+                    "Alignify",
                     style: GoogleFonts.bebasNeue(
                       fontSize: 56,
                       color: Colors.white,

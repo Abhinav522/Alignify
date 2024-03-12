@@ -1,36 +1,45 @@
 {
   "project_info": {
-    "project_number": "678883326424",
-    "project_id": "gradproject-2531f",
-    "storage_bucket": "gradproject-2531f.appspot.com"
+    "project_number": "324855523844",
+    "project_id": "alignify-83a78",
+    "storage_bucket": "alignify-83a78.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:678883326424:android:6e1b42f38e056cab6f1aad",
+        "mobilesdk_app_id": "1:324855523844:android:afe8d6c30688aac67ba351",
         "android_client_info": {
-          "package_name": "com.example.coach_ai"
+          "package_name": "com.example.alignify"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "678883326424-bmlg9tmdq9rvr3rb695f8o2vhlidec4n.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBZLKu4d-9CacQvO66ak06AeJQqvat67bM"
+          "current_key": "AIzaSyDiWbMEki-l8MSlWJX1p9lbVfgPibwT6Yo"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "678883326424-bmlg9tmdq9rvr3rb695f8o2vhlidec4n.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:324855523844:android:cebc336c03eb44cb7ba351",
+        "android_client_info": {
+          "package_name": "com.example.coach_ai"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiWbMEki-l8MSlWJX1p9lbVfgPibwT6Yo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
         }
       }
     }

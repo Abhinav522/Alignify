@@ -75,7 +75,7 @@ class _ExerciseSelectionScreenState extends State<ExerciseSelectionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${widget.exercise.name} Instructions'),
+        title: Text('${widget.exercise.name} Instructions', style: const TextStyle(color: Color(0xFF40D876)),),
         backgroundColor: Colors.black,
       ),
       body: Container(

@@ -1,6 +1,8 @@
 import 'package:alignify/screens/bmi/result_bmi.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class BMI extends StatefulWidget {
   const BMI({Key? key}) : super(key: key);
@@ -12,8 +14,11 @@ class BMI extends StatefulWidget {
 class _BMIState extends State<BMI> {
   bool isMale = true;
   double heightVal = 170;
-  int weight = 55;
+  int weight = 60;
   int age = 18;
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -116,6 +121,7 @@ class _BMIState extends State<BMI> {
                 child: TextButton(
                   onPressed: () {
                     var result = weight / pow(heightVal / 100, 2);
+                    _saveBMIData(result);
                     // print(result);
                     Navigator.push(
                       context,
@@ -141,6 +147,43 @@ class _BMIState extends State<BMI> {
       ),
     );
   }
+
+  // Function to save BMI data to Firestore
+  void _saveBMIData(double result) async {
+    try {
+      // Check if a user is signed in
+      User? user = _auth.currentUser;
+      if (user != null) {
+        String userId = user.uid; // Get the user ID
+
+        // Get current timestamp
+        Timestamp timestamp = Timestamp.now();
+
+        // Save BMI data to Firestore with the user ID
+        await _firestore.collection('users').doc(userId).collection('bmiData').add({
+          'timestamp': timestamp,
+          'bmi': result,
+          'weight': weight,
+          'height': heightVal,
+        });
+
+        // // Navigate to BMI result screen
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (context) {
+        //     return ResultBMI(
+        //       age: age,
+        //       isMale: isMale,
+        //       result: result,
+        //     );
+        //   }),
+        // );
+      }
+    } catch (e) {
+      print('Error saving BMI data: $e');
+    }
+  }
+
 
   Expanded m1Expanded(String gender) {
     return Expanded(

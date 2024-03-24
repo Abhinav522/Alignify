@@ -16,6 +16,9 @@ import '../utils/camera/pose_detector_isolate.dart';
 import '../utils/workout_session.dart';
 import '../utils/camera/render_landmarks.dart';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 class CameraScreen extends StatefulWidget {
   late final List<CameraDescription> cameras;
   final Exercise exercise;
@@ -35,6 +38,10 @@ class _CameraScreenState extends State<CameraScreen>
     with WidgetsBindingObserver {
   late CameraController cameraController;
   CameraImage? cameraImage;
+
+  //timestamp and duration
+  late Timestamp startTime;
+  late Timestamp endTime;
 
   /// Initializing isolate and classifier objects
   late PoseDetector classifier;
@@ -132,6 +139,43 @@ class _CameraScreenState extends State<CameraScreen>
     );
   }
 
+  void _saveExerciseData(
+      Timestamp startTime,
+      Timestamp endTime,
+      int repCount,
+      int restTime,
+      int setCount,
+      List<String> targetedMuscles,
+      String exerciseName) async {
+    try {
+      // Check if a user is signed in
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        String userId = user.uid; // Get the user ID
+
+        // Save exercise data to Firestore with the user ID
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(userId)
+            .collection('exerciseData')
+            .add({
+          'exercise_name': exerciseName,
+          'targeted_muscles': targetedMuscles,
+          'duration': endTime.toDate().difference(startTime.toDate()).inMinutes,
+          'start_time': startTime,
+          'end_time': endTime,
+          'rep_count': repCount,
+          'rest_time': restTime,
+          'set_count': setCount,
+        });
+
+        print('Exercise data saved to Firestore');
+      }
+    } catch (e) {
+      print('Error saving exercise data: $e');
+    }
+  }
+
   Future<bool> _onWillPop() async {
     return (await showDialog(
           context: context,
@@ -183,6 +227,25 @@ class _CameraScreenState extends State<CameraScreen>
 
     super.initState();
     initAsync();
+    startWorkoutTimer();
+  }
+
+  void startWorkoutTimer() {
+    startTime = Timestamp.now();
+  }
+
+  void completeWorkoutTimer(Timestamp startTime) {
+    Timestamp endTime = Timestamp.now();
+
+    _saveExerciseData(
+      startTime,
+      endTime,
+      widget.session.reps,
+      widget.session.restTime,
+      widget.session.sets,
+      widget.exercise.targetedMuscles,
+      widget.exercise.name,
+    );
   }
 
   void initAsync() async {
@@ -436,13 +499,14 @@ class _CameraScreenState extends State<CameraScreen>
                     warmupMode = true;
                     startWarmupTimer();
                     Timer(const Duration(seconds: 15), () {
+                      print("Entered timer block");
                       warmupMode = false;
                       repCounter.warmup(warmupInferences);
                       warmedUpAtLeastOnce = true;
                       coachTTS.speak(
                           "You have now finished your warmup. You can start exercising now! Don't worry, I will tell you each time you perform a rep, and when you complete a set.");
                     });
-                    // print(warmupInferences);
+                    print("Warmup inferences $warmupInferences");
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
@@ -485,6 +549,7 @@ class _CameraScreenState extends State<CameraScreen>
                           );
                         } else {
                           // At this condition, the user will have finished his required sets, and completed his workout
+                          completeWorkoutTimer(startTime);
                           coachTTS.speak(
                               "Well done! You have completed your workout! Great Job!");
                           showDialog(
@@ -590,4 +655,3 @@ class _CameraScreenState extends State<CameraScreen>
     super.dispose();
   }
 }
-

@@ -93,6 +93,74 @@ final List<Exercise> availableExercises = [
     ],
   ),
   Exercise(
+    name: 'Tadasana',
+    instructions: [
+      'Stand with your feet together and your arms at your sides.',
+      'Press down through your feet and engage your thigh muscles.',
+      'Lift your chest and roll your shoulders back.',
+      'Extend your arms overhead with your palms facing each other.',
+      'Reach upward through your fingertips while keeping your shoulders relaxed.',
+      'Hold the pose for several breaths.'
+    ],
+    image: "assets/images/pull_up.png",
+    gif: 'assets/images/pull_up.gif',
+    trackedKeypoint: kKeypointDict['nose'] as int, // You may need to adjust this based on tracking requirements
+    trackingDirection: 1, // You may need to adjust this based on tracking requirements
+    fullRepPosition: true, // Adjust as needed
+    formCorrectnessModel: 'models/tadasana_v2.tflite',
+    targetedMuscles: ['Core', 'Legs', 'Back'],
+    cameraInstructions: [
+      "For this exercise, you need to place your phone in a portrait orientation.",
+      "While exercising, your phone needs to be in a stable position (i.e. not move).",
+      "Your phone's camera should be able to view your entire body's anterior, specially your nose, since we use it to track your reps.",
+      "Start a warmup for 15 seconds. This is necessary for our AI to calculate some statistics off your body.",
+      "Once you're done with your warmup, you should be able to start your workout.",
+      "Once you have started a set, you should perform the required number of reps.",
+      "When you're done, go back to your phone and start your rest period.",
+      "If you want to, you can always just finish your set early and take your rest. Remember, exercise is supposed to be fun!",
+    ],
+    correctionAdvice: [
+      'Ensure your feet are firmly grounded and evenly distributing your weight.',
+      'Engage your core muscles to maintain stability.',
+      'Keep your spine straight and elongated.',
+      'Relax your neck and gaze straight ahead.',
+    ],
+  ),
+  Exercise(
+    name: 'Paravatasana',
+    instructions: [
+      'Start by standing with your feet hip-width apart and your arms at your sides.',
+      'Inhale deeply and raise your arms overhead, palms facing each other.',
+      'Extend through your fingertips while keeping your shoulders relaxed.',
+      'Engage your thigh muscles and lengthen your spine.',
+      'Tilt your pelvis slightly forward to ensure your tailbone is pointing toward the floor.',
+      'Hold the pose for several breaths, maintaining a tall, elongated posture.'
+    ],
+    image: "assets/images/pull_up.png",
+    gif: 'assets/images/pull_up.gif',
+    trackedKeypoint: kKeypointDict['nose'] as int, // You may need to adjust this based on tracking requirements
+    trackingDirection: 1, // You may need to adjust this based on tracking requirements
+    fullRepPosition: true, // Adjust as needed
+    formCorrectnessModel: 'models/paravatasana_v2.tflite', // You may need to create or acquire a relevant model
+    targetedMuscles: ['Core', 'Legs', 'Back'],
+    cameraInstructions: [
+      "For this exercise, you need to place your phone in a portrait orientation.",
+      "While exercising, your phone needs to be in a stable position (i.e. not move).",
+      "Your phone's camera should be able to view your entire body's anterior, specially your nose, since we use it to track your reps.",
+      "Start a warmup for 15 seconds. This is necessary for our AI to calculate some statistics off your body.",
+      "Once you're done with your warmup, you should be able to start your workout.",
+      "Once you have started a set, you should perform the required number of reps.",
+      "When you're done, go back to your phone and start your rest period.",
+      "If you want to, you can always just finish your set early and take your rest. Remember, exercise is supposed to be fun!",
+    ],
+    correctionAdvice: [
+      'Ensure your feet are firmly grounded and evenly distributing your weight.',
+      'Engage your core muscles to maintain stability.',
+      'Keep your spine straight and elongated.',
+      'Relax your neck and gaze straight ahead.',
+    ],
+  ),
+  Exercise(
     name: 'Squats',
     instructions: [
       'Stand with your feet shoulder-width apart and your toes pointing slightly outward.',
@@ -106,10 +174,9 @@ final List<Exercise> availableExercises = [
     trackedKeypoint: kKeypointDict['nose'] as int,
     trackingDirection: 1,
     fullRepPosition: true,
-    formCorrectnessModel: 'models/tadasana_v2.tflite',
+    formCorrectnessModel: 'models/squat.tflite',
     targetedMuscles: [
       'Quads',
-      'Hip Flexors',
       'Hamstrings',
       'Glutes',
     ],

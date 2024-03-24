@@ -1,10 +1,11 @@
 import 'package:alignify/services/firebase_auth_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../widgets/customized_button.dart';
 import '../widgets/customized_textfield.dart';
 import 'login_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -15,8 +16,10 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _emailController = TextEditingController();
-
+  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _bioController = TextEditingController();
+  final TextEditingController _ageController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +58,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     )),
               ),
               CustomizedTextfield(
+                myController: _nameController,
+                hintText: "Name",
+                isPassword: false,
+              ),
+              CustomizedTextfield(
                 myController: _emailController,
                 hintText: "Email",
                 isPassword: false,
@@ -64,6 +72,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 hintText: "Password",
                 isPassword: true,
               ),
+              CustomizedTextfield(
+                myController: _bioController,
+                hintText: "Enter a short Bio",
+                isPassword: false,
+              ),
+              CustomizedTextfield(
+                myController: _ageController,
+                hintText: "Age",
+                isPassword: false,
+              ),
               CustomizedButton(
                 buttonText: "Register",
                 buttonColor: Colors.black,
@@ -71,8 +89,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 onPressed: () async {
                   try {
                     await FirebaseAuthService().signup(
+                        _nameController.text.trim(),
                         _emailController.text.trim(),
-                        _passwordController.text.trim());
+                        _passwordController.text.trim(),
+                        _bioController.text.trim(),
+                        int.parse(_ageController.text.trim()),
+                      );
 
                     if (!mounted) return;
 
@@ -88,24 +110,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   //     MaterialPageRoute(builder: (_) => const LoginScreen()));
                 },
               ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
+              const Padding(
+                padding: EdgeInsets.all(10.0),
                 child: Row(
                   children: [
-                    Container(
-                      height: 1,
-                      width: MediaQuery.of(context).size.height * 0.15,
-                      color: Colors.grey,
-                    ),
+                    // Container(
+                    //   height: 1,
+                    //   width: MediaQuery.of(context).size.height * 0.15,
+                    //   color: Colors.grey,
+                    // ),
+                    /*
                     const Text("Or Register with"),
                     Container(
                       height: 1,
                       width: MediaQuery.of(context).size.height * 0.16,
                       color: Colors.grey,
-                    ),
+                    ),*/
                   ],
                 ),
               ),
+              /*
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
@@ -157,6 +181,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ],
                 ),
               ),
+              */
               const SizedBox(
                 height: 40,
               ),

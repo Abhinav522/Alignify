@@ -19,6 +19,7 @@ dependencies:
   firebase_core: ^2.11.0
   cupertino_icons: ^1.0.2
   google_fonts: ^4.0.4
+  fl_chart: ^0.36.0
   carousel_slider: ^4.0.0
   font_awesome_flutter: ^10.1.0
   google_sign_in: ^5.4.0
@@ -76,6 +77,7 @@ flutter:
     - assets/images/image3.jpg
     - assets/images/emely.jpg
     - assets/images/alexsandra.jpg
+    - assets/images/profile_background.jpg
     - assets/images/squat.jpg
     - assets/images/pull_up.png
     - assets/images/push_up.png

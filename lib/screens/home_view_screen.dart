@@ -1,10 +1,11 @@
 import 'package:alignify/screens/exercise_selection_screen.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'nutrition_screen.dart';
+//import 'nutrition_screen.dart';
 import 'profile_screen.dart';
+import 'progress_screen.dart';
 import 'bmi/calculate_bmi.dart';
 import '../utils/exercise.dart';
 
@@ -19,6 +20,7 @@ class _HomeViewScreenState extends State<HomeViewScreen> {
   int _currentIndex = 0;
   late PageController _pageController;
   late List<Widget> _screens;
+  late String _userId = '';
 
   void _onItemTapped(int index) {
     setState(() {
@@ -33,13 +35,23 @@ class _HomeViewScreenState extends State<HomeViewScreen> {
 
   @override
   void initState() {
+    _fetchUserId();
     _screens = [
-      const HomeViewBody(),
+      HomeViewBody (userId: _userId),
       const BMI(),
-      NutritionScreen(),
+      ProgressScreen(),
     ];
     _pageController = PageController(initialPage: _currentIndex);
     super.initState();
+  }
+
+  void _fetchUserId() {
+    User? user = FirebaseAuth.instance.currentUser; // Get the current user
+    if (user != null) {
+      setState(() {
+        _userId = user.uid; // Store the userID
+      });
+    }
   }
 
   @override
@@ -60,7 +72,7 @@ class _HomeViewScreenState extends State<HomeViewScreen> {
               color: Color(0xFFFAFAFA),
             ),
             Icon(
-              Icons.local_dining,
+              Icons.bar_chart,
               color: Color(0xFFFAFAFA),
             ),
           ]),
@@ -78,11 +90,23 @@ class _HomeViewScreenState extends State<HomeViewScreen> {
   }
 }
 
-class HomeViewBody extends StatelessWidget {
-  const HomeViewBody({
-    super.key,
-  });
+class HomeViewBody extends StatefulWidget {
+  final String userId;
 
+  const HomeViewBody({
+    Key? key,
+    required this.userId,
+  }) : super(key: key);
+
+  @override
+  _HomeViewBodyState createState() => _HomeViewBodyState();
+}
+class _HomeViewBodyState extends State<HomeViewBody> {
+  @override
+  void initState() {
+    // You can access userId using widget.userId
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -132,8 +156,8 @@ class HomeViewBody extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const ProfileScreen(
-                                userId: 'your_user_id_here')),
+                            builder: (context) => ProfileScreen(
+                                userId: widget.userId)),
                       );
                     },
                     child: Container(
@@ -309,78 +333,80 @@ class HomeViewBody extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            ListView.builder(
-                shrinkWrap: true,
-                itemCount: availableExercises.length,
-                scrollDirection: Axis.vertical,
-                itemBuilder: (BuildContext context, index) {
-                  return InkWell(
-                    onTap: () {},
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ExerciseSelectionScreen(
+            Expanded(
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: availableExercises.length,
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (BuildContext context, index) {
+                    return InkWell(
+                      onTap: () {},
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ExerciseSelectionScreen(
+                                exercise: availableExercises[index],
+                              ),
+                            ),
+                          );
+                        },
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          color: Colors.black54,
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                left: 12, right: 8, top: 8, bottom: 8),
+                            child: CustomListTile(
                               exercise: availableExercises[index],
                             ),
                           ),
-                        );
-                      },
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        color: Colors.black54,
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 12, right: 8, top: 8, bottom: 8),
-                          child: CustomListTile(
-                            exercise: availableExercises[index],
-                          ),
                         ),
                       ),
-                    ),
-                  );
-                  /*
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Column(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        catego[index].page));
-                          },
-                          child: Container(
-                            height: 172,
-                            width: 141,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage(catego[index].imagUrl),
-                                fit: BoxFit.cover,
+                    );
+                    /*
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: Column(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          catego[index].page));
+                            },
+                            child: Container(
+                              height: 172,
+                              width: 141,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage(catego[index].imagUrl),
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          catego[index].name,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
+                          const SizedBox(
+                            height: 10,
                           ),
-                        ),
-                      ],
-                    ),
-                  );
-                  */
-                })
+                          Text(
+                            catego[index].name,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                    */
+                  }),
+            )
           ],
         ),
       ),

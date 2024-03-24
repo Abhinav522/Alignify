@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'IntroPage.dart';
+
 // import 'package:firebase_auth/firebase_auth.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -17,7 +20,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String _email = '';
   String _bio = '';
   String _profilePhotoUrl = '';
-  List<Map<String, dynamic>> _progressData = [];
+ // List<Map<String, dynamic>> _progressData = [];
 
   @override
   void initState() {
@@ -38,6 +41,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     });
 
     // Fetch progress data from Firebase
+/* 
     FirebaseFirestore.instance
         .collection('users')
         .doc(widget.userId)
@@ -48,6 +52,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         _progressData = snapshot.docs.map((doc) => doc.data()).toList();
       });
     });
+    */
   }
 
   @override
@@ -102,16 +107,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
           ),
-          const SizedBox(height: 16),
-          const Text(
+          const SizedBox(height: 100),
+          ElevatedButton(
+              onPressed: () async {
+                await FirebaseAuth.instance.signOut();
+                if (!mounted) return;
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return IntroPage();
+                }));
+              },
+              child: const Text("Sign Out")),
+          /*const Text(
             'Progress',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
-          ),
-          Expanded(
+          ),*/
+          /*Expanded(
             child: ListView.builder(
               itemCount: _progressData.length,
               itemBuilder: (context, index) {
@@ -123,8 +137,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 );
               },
             ),
-          ),
-          const SizedBox(height: 16),
+          ),*/
+          const SizedBox(height: 26),
           Expanded(
             child: Container(
               decoration: BoxDecoration(
@@ -161,7 +175,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
   }
-
+  /*
   Widget _buildSportProgress(String sport, String distance, int percentage) {
     return ListTile(
       leading: CircleAvatar(
@@ -192,5 +206,5 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
       ),
     );
-  }
+  }*/
 }

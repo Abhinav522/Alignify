@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'signup_screen.dart';
-import 'home_screen.dart';
+//import 'home_screen.dart';
 import 'package:alignify/widgets/customized_textfield.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+//import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../services/firebase_auth_service.dart';
 import '../widgets/customized_button.dart';
@@ -70,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Align(
                 alignment: Alignment.centerRight,
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(18.0),
                   child: InkWell(
                     onTap: () {
                       Navigator.push(
@@ -158,24 +158,26 @@ class _LoginScreenState extends State<LoginScreen> {
                   //     MaterialPageRoute(builder: (_) => const LoginScreen()));
                 },
               ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  children: [
-                    Container(
-                      height: 1,
-                      width: MediaQuery.of(context).size.height * 0.15,
-                      color: Colors.grey,
-                    ),
-                    const Text("Or Login with"),
-                    Container(
-                      height: 1,
-                      width: MediaQuery.of(context).size.height * 0.18,
-                      color: Colors.grey,
-                    ),
-                  ],
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.all(20.0),
+              //   child: Row(
+              //     children: [
+              //       Container(
+              //         height: 1,
+              //         width: MediaQuery.of(context).size.height * 0.15,
+              //         color: Colors.grey,
+              //       ),
+                    
+              //       const Text("Or Login with"),
+              //       Container(
+              //         height: 1,
+              //         width: MediaQuery.of(context).size.height * 0.18,
+              //         color: Colors.grey,
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              /*
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
@@ -239,15 +241,15 @@ class _LoginScreenState extends State<LoginScreen> {
                         ))
                   ],
                 ),
-              ),
+              ),*/
               const SizedBox(
                 height: 140,
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(48, 8, 8, 8.0),
+              const Padding(
+                padding: EdgeInsets.fromLTRB(48, 48, 8, 8.0),
                 child: Row(
                   // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [
+                  children: [
                     Text("Don't have an account?",
                         style: TextStyle(
                           color: Color(0xff1E232C),

@@ -22,7 +22,12 @@ class RepCounter {
   /// form of "Warmup Mode"
   void warmup(List<int> warmupInferences) {
     // Extracting min and max altitudes from list of inferences
-    warmupInferences = warmupInferences.sublist(30);
+    if (warmupInferences.isNotEmpty) {
+      print("warmup inferences length: ${warmupInferences.length}");
+      warmupInferences = warmupInferences.sublist(30);
+    } else {
+      print("List empty");
+    }
     minAltitude = warmupInferences.reduce(min);
     maxAltitude = warmupInferences.reduce(max);
 

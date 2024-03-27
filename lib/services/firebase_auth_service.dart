@@ -10,7 +10,7 @@ class FirebaseAuthService {
     await auth.signInWithEmailAndPassword(email: email, password: password);
   }
 
-  Future signup(String name, String email, String password, String bio, int age) async {
+  Future signup(String name, String email, String password, String bio, int age, int goalWeight, String imageUrl) async {
     try {
       UserCredential userCredential = await auth.createUserWithEmailAndPassword(
         email: email,
@@ -22,7 +22,9 @@ class FirebaseAuthService {
         'name': name,
         'email': email,
         'bio': bio,
-        'age': age
+        'age': age,
+        'desired_weight': goalWeight,
+        'profile_photo_url': imageUrl,
         // Add other user data if needed
       });
        await FirebaseFirestore.instance.collection('users').doc(userCredential.user!.uid).collection('bmiData').doc().set({

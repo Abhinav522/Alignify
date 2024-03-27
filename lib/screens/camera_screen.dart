@@ -58,7 +58,7 @@ class _CameraScreenState extends State<CameraScreen>
   /// WARM UP MODE-RELATED FIELDS
   bool warmupMode = false;
   bool warmedUpAtLeastOnce = false;
-  int _warmupSecondsRemaining = 15;
+  int _warmupSecondsRemaining = 60;
   List<int> warmupInferences = [];
 
   /// ******************************
@@ -220,13 +220,13 @@ class _CameraScreenState extends State<CameraScreen>
 
   @override
   void initState() {
+    initAsync();
     repCounter = RepCounter(maxRepCount: widget.session.reps);
     formClassifier =
         FormClassifier(confidenceModel: widget.exercise.formCorrectnessModel);
     _restSecondsRemaining = widget.session.restTime;
 
     super.initState();
-    initAsync();
     startWorkoutTimer();
   }
 
@@ -267,7 +267,7 @@ class _CameraScreenState extends State<CameraScreen>
     classifier.loadModel();
 
     coachTTS.speak(
-        "Welcome to Coach.ai! Please read the following instructions carefully.");
+        "Welcome to Alignify Please read the following instructions carefully.");
     showInstructions();
 
     startCameraStream();
@@ -305,9 +305,10 @@ class _CameraScreenState extends State<CameraScreen>
 
     List<dynamic> inferenceResultsNormalised =
         inferenceResultsMap['resultsNormalised'] as List<dynamic>;
-    // print(inferenceResultsNormalised);
+    print('inferenceResultsNormalised $inferenceResultsNormalised');
     formClassifier.runModel(inferenceResultsNormalised);
-    // print(formClassifier.outputConfidence.getDoubleList()[0]);
+    print('formClassifier.outputConfidence.getDoubleList()[0]');
+    print(formClassifier.outputConfidence.getDoubleList()[0]);
     formCorrectness = formClassifier.outputConfidence.getDoubleList()[0];
 
     List<dynamic> inferenceResults =
@@ -371,7 +372,7 @@ class _CameraScreenState extends State<CameraScreen>
   }
 
   void startWarmupTimer() {
-    _warmupSecondsRemaining = 15;
+    _warmupSecondsRemaining = 60;
     Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         if (_warmupSecondsRemaining > 0) {
@@ -466,7 +467,7 @@ class _CameraScreenState extends State<CameraScreen>
                     left: 24,
                     child: Text(
                       // "${(formCorrectness * 100).toStringAsFixed(2)}%",
-                      formCorrectness > 0.5 ? "Correct" : "Incorrect",
+                      formCorrectness > 0.5 ? "Correct ${(formCorrectness * 100).toStringAsFixed(2)}%" : "Incorrect",
                       style: TextStyle(
                         color:
                             formCorrectness > 0.5 ? Colors.green : Colors.red,
@@ -498,7 +499,7 @@ class _CameraScreenState extends State<CameraScreen>
                     warmupInferences.clear();
                     warmupMode = true;
                     startWarmupTimer();
-                    Timer(const Duration(seconds: 15), () {
+                    Timer(const Duration(seconds: 60), () {
                       print("Entered timer block");
                       warmupMode = false;
                       repCounter.warmup(warmupInferences);

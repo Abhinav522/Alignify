@@ -40,7 +40,7 @@ final List<Exercise> availableExercises = [
     trackedKeypoint: kKeypointDict['left_shoulder'] as int,
     trackingDirection: 0,
     fullRepPosition: true,
-    formCorrectnessModel: 'models/pushUp_version2.tflite',
+    formCorrectnessModel: 'models/pushUp_v3.tflite',
     targetedMuscles: ['Chest', 'Triceps', 'Shoulders'],
     cameraInstructions: [
       "For this exercise, you need to place your phone in a landscape orientation.",
@@ -102,9 +102,9 @@ final List<Exercise> availableExercises = [
       'Reach upward through your fingertips while keeping your shoulders relaxed.',
       'Hold the pose for several breaths.'
     ],
-    image: "assets/images/pull_up.png",
-    gif: 'assets/images/pull_up.gif',
-    trackedKeypoint: kKeypointDict['nose'] as int, // You may need to adjust this based on tracking requirements
+    image: "assets/images/tadasana.jpg",
+    gif: 'assets/images/tadasana.gif',
+    trackedKeypoint: kKeypointDict['right_wrist'] as int, // You may need to adjust this based on tracking requirements
     trackingDirection: 1, // You may need to adjust this based on tracking requirements
     fullRepPosition: true, // Adjust as needed
     formCorrectnessModel: 'models/tadasana_v2.tflite',
@@ -127,23 +127,22 @@ final List<Exercise> availableExercises = [
     ],
   ),
   Exercise(
-    name: 'Paravatasana',
+    name: 'Vajrasana',
     instructions: [
-      'Start by standing with your feet hip-width apart and your arms at your sides.',
-      'Inhale deeply and raise your arms overhead, palms facing each other.',
-      'Extend through your fingertips while keeping your shoulders relaxed.',
-      'Engage your thigh muscles and lengthen your spine.',
-      'Tilt your pelvis slightly forward to ensure your tailbone is pointing toward the floor.',
-      'Hold the pose for several breaths, maintaining a tall, elongated posture.'
+      'Kneel on the floor with your toes together and heels apart.', 
+      'Sit back onto your heels.',
+      'Rest your hands on your knees, palms down..', 
+      'Keep your spine straight, shoulders relaxed.',
+      'Hold the pose and breathe deeply.' 
     ],
-    image: "assets/images/pull_up.png",
-    gif: 'assets/images/pull_up.gif',
-    trackedKeypoint: kKeypointDict['nose'] as int, // You may need to adjust this based on tracking requirements
-    trackingDirection: 1, // You may need to adjust this based on tracking requirements
-    fullRepPosition: true, // Adjust as needed
-    formCorrectnessModel: 'models/paravatasana_v2.tflite', // You may need to create or acquire a relevant model
-    targetedMuscles: ['Core', 'Legs', 'Back'],
-    cameraInstructions: [
+    image: "assets/images/vajrasana.jpg",
+    gif: 'assets/images/vajrasana.gif',
+    trackedKeypoint:  kKeypointDict['right_shoulder'] as int,
+    trackingDirection: 1,
+    fullRepPosition: false, 
+    formCorrectnessModel: 'models/VAJRA.tflite', // A model trained on Vajrasana variations
+    targetedMuscles: ['Quadriceps', 'Pelvic Floor', 'Spine stabilizers'], 
+    cameraInstructions: [ 
       "For this exercise, you need to place your phone in a portrait orientation.",
       "While exercising, your phone needs to be in a stable position (i.e. not move).",
       "Your phone's camera should be able to view your entire body's anterior, specially your nose, since we use it to track your reps.",
@@ -152,13 +151,13 @@ final List<Exercise> availableExercises = [
       "Once you have started a set, you should perform the required number of reps.",
       "When you're done, go back to your phone and start your rest period.",
       "If you want to, you can always just finish your set early and take your rest. Remember, exercise is supposed to be fun!",
-    ],
-    correctionAdvice: [
-      'Ensure your feet are firmly grounded and evenly distributing your weight.',
-      'Engage your core muscles to maintain stability.',
-      'Keep your spine straight and elongated.',
-      'Relax your neck and gaze straight ahead.',
-    ],
+    ], 
+    correctionAdvice: [ 
+        'Keep your spine tall and straight.', 
+        'Relax your shoulders away from your ears.', 
+        'Ensure your hips are resting evenly on your heels.',
+        
+    ], 
   ),
   Exercise(
     name: 'Squats',
@@ -196,7 +195,41 @@ final List<Exercise> availableExercises = [
       'Keep your chest up and back straight',
       'Push through your heels to stand up',
     ],
-  )
+  ),
+  Exercise(
+    name: 'Paravatasana',
+    instructions: [
+      'Start by standing with your feet hip-width apart and your arms at your sides.',
+      'Inhale deeply and raise your arms overhead, palms facing each other.',
+      'Extend through your fingertips while keeping your shoulders relaxed.',
+      'Engage your thigh muscles and lengthen your spine.',
+      'Tilt your pelvis slightly forward to ensure your tailbone is pointing toward the floor.',
+      'Hold the pose for several breaths, maintaining a tall, elongated posture.'
+    ],
+    image: "assets/images/pull_up.png",
+    gif: 'assets/images/pull_up.gif',
+    trackedKeypoint: kKeypointDict['left_wrist'] as int, // You may need to adjust this based on tracking requirements
+    trackingDirection: 1, // You may need to adjust this based on tracking requirements
+    fullRepPosition: true, // Adjust as needed
+    formCorrectnessModel: 'assets/models/paravatasana_v2.tflite', // You may need to create or acquire a relevant model
+    targetedMuscles: ['Core', 'Legs', 'Back'],
+    cameraInstructions: [
+      "For this exercise, you need to place your phone in a portrait orientation.",
+      "While exercising, your phone needs to be in a stable position (i.e. not move).",
+      "Your phone's camera should be able to view your entire body's anterior, specially your nose, since we use it to track your reps.",
+      "Start a warmup for 15 seconds. This is necessary for our AI to calculate some statistics off your body.",
+      "Once you're done with your warmup, you should be able to start your workout.",
+      "Once you have started a set, you should perform the required number of reps.",
+      "When you're done, go back to your phone and start your rest period.",
+      "If you want to, you can always just finish your set early and take your rest. Remember, exercise is supposed to be fun!",
+    ],
+    correctionAdvice: [
+      'Ensure your feet are firmly grounded and evenly distributing your weight.',
+      'Engage your core muscles to maintain stability.',
+      'Keep your spine straight and elongated.',
+      'Relax your neck and gaze straight ahead.',
+    ],
+  ),
 ];
 
 /// MoveNet Keypoints constants

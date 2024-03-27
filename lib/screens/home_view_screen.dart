@@ -37,7 +37,7 @@ class _HomeViewScreenState extends State<HomeViewScreen> {
   void initState() {
     _fetchUserId();
     _screens = [
-      HomeViewBody (userId: _userId),
+      HomeViewBody(userId: _userId),
       const BMI(),
       ProgressScreen(),
     ];
@@ -101,12 +101,14 @@ class HomeViewBody extends StatefulWidget {
   @override
   _HomeViewBodyState createState() => _HomeViewBodyState();
 }
+
 class _HomeViewBodyState extends State<HomeViewBody> {
   @override
   void initState() {
     // You can access userId using widget.userId
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -123,11 +125,11 @@ class _HomeViewBodyState extends State<HomeViewBody> {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.only(top: 30.0, left: 10, right: 10),
+        padding: const EdgeInsets.only(top: 50.0, left: 10, right: 10),
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(right: 20),
+              padding: const EdgeInsets.only(left:20, right: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -156,8 +158,8 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ProfileScreen(
-                                userId: widget.userId)),
+                            builder: (context) =>
+                                ProfileScreen(userId: widget.userId)),
                       );
                     },
                     child: Container(
@@ -169,43 +171,22 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                           width: 3,
                           color: const Color(0xFF40D876),
                         ),
-                        image: const DecorationImage(
-                          image: AssetImage("assets/images/emely.jpg"),
-                          fit: BoxFit.cover,
+                      ),
+                      child: const Center(
+                        child: Icon(
+                          Icons.account_circle,
+                          size: 36,
+                          color: Colors.white,
                         ),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 20.0),
-              child: Container(
-                width: 70,
-                height: 70,
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(.1),
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                child: Center(
-                  child: Container(
-                    height: 50,
-                    width: 70,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF40D876),
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    child: const Center(
-                      child: Icon(
-                        Icons.play_arrow,
-                        size: 20,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+            const Padding(
+              padding: EdgeInsets.all(20),
+              child: SizedBox(height: 20),
             ),
             /*
             Padding(
@@ -333,6 +314,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            const SizedBox(height:20),
             Expanded(
               child: ListView.builder(
                   shrinkWrap: true,

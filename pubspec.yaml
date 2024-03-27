@@ -14,6 +14,7 @@ dependencies:
   flutter:
     sdk: flutter
   cloud_firestore: ^4.6.0
+  firebase_storage: ^11.2.4
   firebase_auth: ^4.5.0
   firebase_core_platform_interface: ^4.7.0
   firebase_core: ^2.11.0
@@ -79,11 +80,16 @@ flutter:
     - assets/images/alexsandra.jpg
     - assets/images/profile_background.jpg
     - assets/images/squat.jpg
+    - assets/images/tadasana.jpg
+    - assets/images/vajrasana.jpg
     - assets/images/pull_up.png
     - assets/images/push_up.png
     - assets/images/push_up.gif
     - assets/images/pull_up.gif
     - assets/images/squat.gif
+    - assets/images/tadasana.gif
+    - assets/images/vajrasana.gif
+    - assets/images/tadasana_steps.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

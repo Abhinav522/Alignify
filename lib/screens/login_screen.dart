@@ -39,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: 50,
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black, width: 1),
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(50),
                   ),
                   child: IconButton(
                       icon: const Icon(Icons.arrow_back_ios_sharp),
@@ -245,28 +245,37 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(
                 height: 140,
               ),
-              const Padding(
-                padding: EdgeInsets.fromLTRB(48, 48, 8, 8.0),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(48, 8, 8, 8.0),
                 child: Row(
                   // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text("Don't have an account?",
+                    const Text("Don't have an account?",
                         style: TextStyle(
                           color: Color(0xff1E232C),
                           fontSize: 15,
                         )),
-                    Text("  Register Now",
-                        style: TextStyle(
-                          color: Color(0xff35C2C1),
-                          fontSize: 15,
-                        )),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => const SignUpScreen()));
+                      },
+                      child: const Text("  Register Now",
+                          style: TextStyle(
+                            color: Color(0xff35C2C1),
+                            fontSize: 15,
+                          )),
+                    ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
-      )),
+      ),
+      ),
     );
   }
 }

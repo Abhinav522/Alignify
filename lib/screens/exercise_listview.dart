@@ -26,6 +26,8 @@ class _ExerciseListViewState extends State<ExerciseListView> {
           .collection('users')
           .doc(userId)
           .collection('exerciseData')
+          .orderBy('end_time',
+              descending: true) // Order by timestamp descending
           .get();
 
       final List<Map<String, dynamic>> data = [];
@@ -53,17 +55,18 @@ class _ExerciseListViewState extends State<ExerciseListView> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text('Exercise List', style: TextStyle(color: Color(0xFF40D876))),
+        title: const Text('Exercise List',
+            style: TextStyle(color: Color(0xFF40D876))),
         centerTitle: true,
         backgroundColor: Colors.black,
       ),
       backgroundColor: Colors.black,
       body: isLoading
-          ? Center(
+          ? const Center(
               child: CircularProgressIndicator(),
             )
           : exerciseData.isEmpty
-              ? Center(
+              ? const Center(
                   child: Text(
                     'No exercises found.',
                     style: TextStyle(color: Color.fromARGB(255, 197, 17, 17)),
@@ -72,7 +75,12 @@ class _ExerciseListViewState extends State<ExerciseListView> {
               : ListView.builder(
                   itemCount: exerciseData.length,
                   itemBuilder: (context, index) {
-                    return ExerciseCard(exerciseData: exerciseData[index]);
+                    return Column(
+                      children: [
+                        ExerciseCard(exerciseData: exerciseData[index]),
+                        const SizedBox(height: 16), // Add extra space below each card
+                      ],
+                    );
                   },
                 ),
     );
@@ -88,27 +96,86 @@ class ExerciseCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<String> targetedMuscles =
         List<String>.from(exerciseData['targeted_muscles'] ?? []);
+    final int durationInMin = exerciseData['duration'];
+    final int setCount = exerciseData['set_count'];
+    final int repCount = exerciseData['rep_count'];
+    final DateTime startTime =
+        (exerciseData['start_time'] as Timestamp).toDate();
+    final String formattedDate =
+        '${startTime.day}-${startTime.month}-${startTime.year}';
 
-    return Card(
-      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-      child: ListTile(
-        title: Text(
-          exerciseData['exercise_name'] ?? 'Exercise Name',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+    return Column(children: [
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Row(
+          children: [
+            const Icon(Icons.calendar_today, color: Colors.green),
+            const SizedBox(width: 8),
+            Text(
+              formattedDate,
+              style: const TextStyle(color: Colors.green),
+            ),
+          ],
         ),
-        subtitle: Container(
-          padding: EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: targetedMuscles
-                .map((muscle) => Text(
-                      muscle,
-                      style: TextStyle(color: Color.fromARGB(255, 48, 50, 83)),
-                    ))
-                .toList(),
+      ),
+      Card(
+        margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+        child: ListTile(
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                exerciseData['exercise_name'] ?? 'Exercise Name',
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Icon(Icons.access_time), // Clock icon
+                  const SizedBox(width: 4),
+                  Text(
+                    '$durationInMin min',
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          subtitle: Padding(
+            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: targetedMuscles
+                      .map((muscle) => Text(
+                            muscle,
+                            style: const TextStyle(
+                                color: Color.fromARGB(255, 48, 50, 83)),
+                          ))
+                      .toList(),
+                ),
+                // Column(
+                //   crossAxisAlignment: CrossAxisAlignment.center,
+                //   children: [
+                //     const Icon(Icons.calendar_today),
+                //     Text(formattedDate),
+                //   ],
+                // ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text('Sets: $setCount'),
+                    Text('Reps: $repCount'),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
-    );
+    ]);
   }
 }

@@ -32,7 +32,8 @@ class FormClassifier {
     inputs = [inferenceResultsNormalised];
     Map<int, Object> outputs = {0: outputConfidence.buffer};
     interpreter.runForMultipleInputs(inputs, outputs);
-    // print(outputConfidence);
+    
+    print('outputConfidence  ${outputConfidence.buffer.asUint8List()}');
   }
 
   Interpreter get interpreter => _interpreter;
